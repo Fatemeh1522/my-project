@@ -9,7 +9,8 @@ void gotoxy(int x, int y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 int print()
-{ const int length=25;
+{
+    const int length=25;
     const int width=20;
     for(int i=0;i<length;i++)
        {
@@ -70,45 +71,52 @@ int print()
     }
     gotoxy(2,1);
 }
-int main()
+int start()
 {
     int x=2,y=1,x0,y0;
     char ch;
+
+    // پاک کردن صفحه
     system("cls");
     print();
+
+    // حرکت کاراکتر و نمایش آن
+   // gotoxy(x, y);
     cout << "P";
 
       while (true) {
-        if (_kbhit()) {
-            ch = _getch();
+        if (_kbhit()) { // بررسی می‌کند که آیا کلید فشرده شده است
+            ch = _getch(); // دریافت ورودی کلید
 
-            cout << " ";
+            // پاک کردن کاراکتر از موقعیت قبلی
+            //gotoxy(x, y);
+            std::cout << " "; // فضای خالی برای پاک کردن کاراکتر
 
+            // بررسی ورودی دکمه‌های جهت‌دار
               switch (ch) {
-                case 72:
-                     if (y > 0)
-                        {x0=x; y0=y; y-=1;}
+                case 72: // کلید بالا
+                     if (y > 0){x0=x; y0=y; y-=2;}
                     break;
-                case 80:
-                     if (y < 21)
-                        {x0=x; y0=y; y+=1;}
+                case 80: // کلید پایین
+
+                     if (y < 24){x0=x; y0=y; y+=2;} // 24 محدودیت عمودی
                     break;
-                case 75:
-                     if (x > 1)
-                        {x0=x; y0=y; x-=1;}
+                case 75: // کلید چپ
+
+                     if (x > 0){x0=x; y0=y; x-=4;}
                     break;
-                case 77:
-                     if (x < 47)
-                        {x0=x; y0=y; x+=1;}
+                case 77: // کلید راست
+                     if (x < 79){x0=x; y0=y; x+=4;} // 79 محدودیت افقی
                     break;
-                case 27:
-                    return 0;
+                case 27: // کلید ESC برای خروج
+                    return 0; // خاتمه برنامه
             }
+            // نمایش کاراکتر در موقعیت جدید
 
             system("cls");
             print();
             gotoxy(x, y);
-            if((x==4||x==12||x==20||x==28||x==37||x==8||x==16||x==24||x==32||x==5||x==6||x==7||x==13||x==14||x==15||x==21||x==22||x==23||x==29||x==30||x==31||x==38||x==39||x==40)&&(y==3||y==7||y==11||y==15||y==19))
+            if((x==6 || x==14 || x==22 || x==30 || x==38) && (y==3 || y==7 || y==11 || y==15 || y==19))
             {
                gotoxy(x0,y0);
                cout<<"P";
@@ -135,8 +143,62 @@ int main()
                else
             cout << "P";
         }
+        //Sleep(100); // تأخیر برای جلوگیری از استفاده بیش از حد از CPU
     }
     }
+    int main()
+{
+    const int length=25;
+    const int width=20;
+    char choice;
+    for(int i=0;i<length;i++)
+        cout<<"* ";
+    for(int i=0;i<width;i++)
+       {
+         cout<<endl<<"*";
+         for(int j=0;j<length-1;j++)
+            cout<<"  ";
+         cout<<"*";
+       }
+       cout<<endl;
+    for(int i=0;i<length;i++)
+        cout<<" *";
+
+        gotoxy(18,2);
+        cout<<"Spoon man";
+        gotoxy(2,4);
+        cout<<"1 _ Start";
+        gotoxy(2,6);
+        cout<<"2 _ level: A_Eazy  B_Medium  C_Hard";
+        gotoxy(2,8);
+        cout<<"3 _ Help";
+        gotoxy(2,10);
+        cout<<"4 _ Exit";
+        gotoxy(2,12);
+        cin>>choice;
+        switch(choice)
+        {
+            case'1':system("cls");
+            start();
+            break;
+
+            //case'2': gotoxy(2,14);
+                    //cin>>choice;
+                    //switch(choice) {case'A':
+                                    //case'B':
+                                   // case'C':
+                                   // } break;
+            case'3':system("cls");
+
+            break;
+            case'4': return 0;
+
+        }
+
+
+
+}
+
 
 
 

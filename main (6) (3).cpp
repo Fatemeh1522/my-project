@@ -76,42 +76,35 @@ int start()
     int x=2,y=1,x0,y0;
     char ch;
 
-    // پاک کردن صفحه
     system("cls");
     print();
 
-    // حرکت کاراکتر و نمایش آن
-   // gotoxy(x, y);
     cout << "P";
 
       while (true) {
-        if (_kbhit()) { // بررسی می‌کند که آیا کلید فشرده شده است
-            ch = _getch(); // دریافت ورودی کلید
+        if (_kbhit()) {
+            ch = _getch();
 
-            // پاک کردن کاراکتر از موقعیت قبلی
-            //gotoxy(x, y);
-            std::cout << " "; // فضای خالی برای پاک کردن کاراکتر
+            std::cout << " ";
 
-            // بررسی ورودی دکمه‌های جهت‌دار
               switch (ch) {
-                case 72: // کلید بالا
+                case 72:
                      if (y > 0){x0=x; y0=y; y-=2;}
                     break;
-                case 80: // کلید پایین
+                case 80:
 
-                     if (y < 24){x0=x; y0=y; y+=2;} // 24 محدودیت عمودی
+                     if (y < 24){x0=x; y0=y; y+=2;}
                     break;
-                case 75: // کلید چپ
+                case 75:
 
                      if (x > 0){x0=x; y0=y; x-=4;}
                     break;
-                case 77: // کلید راست
-                     if (x < 79){x0=x; y0=y; x+=4;} // 79 محدودیت افقی
+                case 77:
+                     if (x < 79){x0=x; y0=y; x+=4;}
                     break;
-                case 27: // کلید ESC برای خروج
-                    return 0; // خاتمه برنامه
+                case 27:
+                    return 0;
             }
-            // نمایش کاراکتر در موقعیت جدید
 
             system("cls");
             print();
@@ -143,7 +136,6 @@ int start()
                else
             cout << "P";
         }
-        //Sleep(100); // تأخیر برای جلوگیری از استفاده بیش از حد از CPU
     }
     }
     int main()
